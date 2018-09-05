@@ -51,8 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="libraries\internet\Request.cs" />
     <Compile Include="libraries\intern\Parse.cs" />
     <Compile Include="libraries\math\Fibbonacci.cs" />
+    <Compile Include="libraries\math\JosephusCircle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

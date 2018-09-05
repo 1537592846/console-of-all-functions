@@ -122,10 +122,12 @@ namespace console_of_all_functions
             List<object> parameterList = new List<object>();
 
             var parameters = function.Remove(0, method.Name.Length).Replace("(", "").Replace(")", "").Split(',');
-
-            for(int i = 0; i < parameters.Length; i++)
+            if (parameters[0] != "")
             {
-                parameterList.Add(Parse.ParseValue(method.GetParameters()[i].ParameterType.Name,parameters[i]));
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    parameterList.Add(Parse.ParseValue(method.GetParameters()[i].ParameterType.Name, parameters[i]));
+                }
             }
 
             method.Invoke(null, parameterList.ToArray());
