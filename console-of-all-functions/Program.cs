@@ -53,7 +53,7 @@ namespace console_of_all_functions
                     string library = entry.Split(' ')[1];
                     string className = entry.Split(' ')[2];
                     string function = entry.Substring(library.Count() + className.Count() + 6);
-                    RunFunction(library,className,function);
+                    RunFunction(library, className, function);
                 }
 
                 Console.WriteLine();
@@ -63,9 +63,14 @@ namespace console_of_all_functions
         static void ShowLibraries()
         {
             var librariesList = new List<string>();
-            librariesList.Add("math");
+            var typeList = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.Namespace.Contains("libraries") && !x.Namespace.EndsWith("intern")).ToList();
 
-            foreach (var libraryName in librariesList)
+            foreach (var type in typeList)
+            {
+                librariesList.Add(type.Namespace.Substring(type.Namespace.LastIndexOf('.') + 1));
+            }
+
+            foreach (var libraryName in librariesList.Distinct())
             {
                 Console.WriteLine(libraryName);
             }
@@ -85,11 +90,11 @@ namespace console_of_all_functions
 
         static void ShowFunctions(string library, string className)
         {
-            Type type =Type.GetType("console_of_all_functions.libraries."+library+"."+className);
-            
+            Type type = Type.GetType("console_of_all_functions.libraries." + library + "." + className);
+
             foreach (var method in type.GetRuntimeMethods())
             {
-                if (type.GetMethods().Contains(method))
+                if (type.GetMethods().Contains(method) || !method.IsAssembly)
                 {
                     return;
                 }
@@ -98,14 +103,14 @@ namespace console_of_all_functions
                 line += "(";
                 string parameters = "";
 
-                foreach(var parameter in method.GetParameters())
+                foreach (var parameter in method.GetParameters())
                 {
                     if (parameters != "")
                     {
                         parameters += ", ";
                     }
 
-                    parameters += parameter.ParameterType.Name+ " " + parameter.Name;
+                    parameters += parameter.ParameterType.Name + " " + parameter.Name;
                 }
 
                 line += parameters;
@@ -115,10 +120,10 @@ namespace console_of_all_functions
             }
         }
 
-        static void RunFunction(string library,string className,string function)
+        static void RunFunction(string library, string className, string function)
         {
             Type type = Type.GetType("console_of_all_functions.libraries." + library + "." + className);
-            MethodInfo method = type.GetRuntimeMethods().Where(x=> x.Name== function.Split('(')[0]).First();
+            MethodInfo method = type.GetRuntimeMethods().Where(x => x.Name == function.Split('(')[0]).First();
             List<object> parameterList = new List<object>();
 
             var parameters = function.Remove(0, method.Name.Length).Replace("(", "").Replace(")", "").Split(',');

@@ -19,7 +19,8 @@ namespace console_of_all_functions.libraries.internet
                 request.Timeout = 3000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Console.WriteLine("The site returned a " + response.StatusDescription + " response");
-            }catch
+            }
+            catch
             {
                 Console.WriteLine("Problems connecting with the site");
             }
