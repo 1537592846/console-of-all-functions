@@ -16,7 +16,7 @@ namespace console_of_all_functions.libraries.internet
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(site);
                 request.Method = "GET";
-                request.Timeout = 3000;
+                request.Timeout = 5000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Console.WriteLine("The site returned a " + response.StatusDescription + " response");
             }

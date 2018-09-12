@@ -11,52 +11,58 @@ namespace console_of_all_functions
     {
         static void Main(string[] args)
         {
-            while (true)
+            try
             {
-                Console.Write("Type command: ");
-                string entry = Console.ReadLine();
-                Console.WriteLine("_____________________________");
-
-                if (entry.ToLower() == "exit")
+                while (true)
                 {
-                    Console.WriteLine("Exiting...");
-                    Thread.Sleep(3000);
-                    return;
-                }
+                    Console.Write("Type command: ");
+                    string entry = Console.ReadLine();
+                    Console.WriteLine("_____________________________");
 
-                if (entry.ToLower() == "help")
-                {
-                    Console.WriteLine("exit                                             Ends the program");
-                    Console.WriteLine("libraries                                        Show current libraries");
-                    Console.WriteLine("classes 'library'                                Show current classes on the specified library");
-                    Console.WriteLine("functions 'library' 'class'                      Show current functions ont the specified class in the library");
-                    Console.WriteLine("run 'library' 'class' 'function'('parameters')   Execute define function");
-                }
+                    if (entry.ToLower() == "exit")
+                    {
+                        Console.WriteLine("Exiting...");
+                        Thread.Sleep(1500);
+                        return;
+                    }
 
-                if (entry.ToLower() == "libraries")
-                {
-                    ShowLibraries();
-                }
+                    if (entry.ToLower() == "help")
+                    {
+                        Console.WriteLine("exit                                             Ends the program");
+                        Console.WriteLine("libraries                                        Show current libraries");
+                        Console.WriteLine("classes 'library'                                Show current classes on the specified library");
+                        Console.WriteLine("functions 'library' 'class'                      Show current functions ont the specified class in the library");
+                        Console.WriteLine("run 'library' 'class' 'function'('parameters')   Execute define function");
+                    }
 
-                if (entry.ToLower().Contains("classes"))
-                {
-                    ShowClasses(entry.Split(' ')[1]);
-                }
+                    if (entry.ToLower() == "libraries")
+                    {
+                        ShowLibraries();
+                    }
 
-                if (entry.ToLower().Contains("functions"))
-                {
-                    ShowFunctions(entry.Split(' ')[1], entry.Split(' ')[2]);
-                }
+                    if (entry.ToLower().Contains("classes"))
+                    {
+                        ShowClasses(entry.Split(' ')[1]);
+                    }
 
-                if (entry.Split(' ')[0].ToLower() == "run")
-                {
-                    string library = entry.Split(' ')[1];
-                    string className = entry.Split(' ')[2];
-                    string function = entry.Substring(library.Count() + className.Count() + 6);
-                    RunFunction(library, className, function);
-                }
+                    if (entry.ToLower().Contains("functions"))
+                    {
+                        ShowFunctions(entry.Split(' ')[1], entry.Split(' ')[2]);
+                    }
 
-                Console.WriteLine();
+                    if (entry.Split(' ')[0].ToLower() == "run")
+                    {
+                        string library = entry.Split(' ')[1];
+                        string className = entry.Split(' ')[2];
+                        string function = entry.Substring(library.Count() + className.Count() + 6);
+                        RunFunction(library, className, function);
+                    }
+
+                    Console.WriteLine();
+                }
+            }catch
+            {
+                Console.WriteLine("Problem executing command, check sintax");
             }
         }
 

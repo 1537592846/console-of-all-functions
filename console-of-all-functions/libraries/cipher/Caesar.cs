@@ -1,4 +1,5 @@
-﻿using System;
+﻿using console_of_all_functions.libraries.language;
+using System;
 
 namespace console_of_all_functions.libraries.cipher
 {
@@ -8,7 +9,7 @@ namespace console_of_all_functions.libraries.cipher
         {
             foreach (char letter in text)
             {
-                Console.Write(CipherLetter(letter, jump));
+                CipherLetter(letter, jump);
             }
         }
 
@@ -16,15 +17,16 @@ namespace console_of_all_functions.libraries.cipher
         {
             foreach (char letter in text)
             {
-                Console.Write(CipherLetter(letter, 26-jump));
+                CipherLetter(letter, -1 * jump);
             }
         }
 
-        static char CipherLetter(char letter,int jump)
+        static void CipherLetter(char letter, int jump)
         {
-            if (!char.IsLetter(letter)) return letter;
-            int letterValue = Convert.ToInt32(char.ToUpper(letter))+jump;
-            return Convert.ToChar(65 + ((letterValue-65) % 26));
+            if (!char.IsLetter(letter)) return;
+            jump = jump % 26;
+            int letterValue = Convert.ToInt32(char.ToUpper(letter)) + jump;
+            Alphabet.NoLineLetterASCII((26+letterValue - 65) % 26 + 65);
         }
     }
 }
