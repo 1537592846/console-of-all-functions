@@ -54,7 +54,6 @@
     <Compile Include="libraries\cipher\Caesar.cs" />
     <Compile Include="libraries\cipher\Matrix.cs" />
     <Compile Include="libraries\cipher\Vigenere.cs" />
-    <Compile Include="libraries\file\Exe.cs" />
     <Compile Include="libraries\internet\Request.cs" />
     <Compile Include="libraries\intern\Parse.cs" />
     <Compile Include="libraries\language\Alphabet.cs" />
