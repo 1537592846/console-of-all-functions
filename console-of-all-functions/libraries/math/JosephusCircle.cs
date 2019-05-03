@@ -14,6 +14,12 @@ namespace console_of_all_functions.libraries.math
 
         internal static void ComplexCircle(int people, int jump)
         {
+            if (jump == 1)
+            {
+                SimpleCircle(people);
+                return;
+            }
+
             List<int> list = new List<int>();
 
             for (int i = 0; i < people; i++)

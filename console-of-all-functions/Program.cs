@@ -11,9 +11,9 @@ namespace console_of_all_functions
     {
         static void Main(string[] args)
         {
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
                     Console.Write("Type command: ");
                     string entry = Console.ReadLine();
@@ -60,9 +60,10 @@ namespace console_of_all_functions
 
                     Console.WriteLine();
                 }
-            }catch
-            {
-                Console.WriteLine("Problem executing command, check sintax");
+                catch
+                {
+                    Console.WriteLine("Problem executing command, check sintax");
+                }
             }
         }
 
