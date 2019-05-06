@@ -32,7 +32,7 @@ namespace console_of_all_functions
                         Console.WriteLine("libraries                                        Show current libraries");
                         Console.WriteLine("classes 'library'                                Show current classes on the specified library");
                         Console.WriteLine("functions 'library' 'class'                      Show current functions ont the specified class in the library");
-                        Console.WriteLine("run 'library' 'class' 'function'('parameters')   Execute define function");
+                        Console.WriteLine("run 'library' 'class' 'function'('parameters')   Execute define function, use ';' to separate parameters");
                     }
 
                     if (entry.ToLower() == "libraries")
@@ -133,7 +133,7 @@ namespace console_of_all_functions
             MethodInfo method = type.GetRuntimeMethods().Where(x => x.Name == function.Split('(')[0]).First();
             List<object> parameterList = new List<object>();
 
-            var parameters = function.Remove(0, method.Name.Length).Replace("(", "").Replace(")", "").Split(',');
+            var parameters = function.Substring(function.IndexOf('(') + 1, function.Length - function.IndexOf('(') -2).Split(';');
             if (parameters[0] != "")
             {
                 for (int i = 0; i < parameters.Length; i++)
