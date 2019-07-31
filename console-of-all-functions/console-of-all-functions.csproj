@@ -59,6 +59,7 @@
     <Compile Include="libraries\math\JosephusCircle.cs" />
     <Compile Include="libraries\math\Prime.cs" />
     <Compile Include="libraries\math\Sigma.cs" />
+    <Compile Include="libraries\math\Sudoku.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
