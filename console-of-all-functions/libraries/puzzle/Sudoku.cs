@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace console_of_all_functions.libraries.math
+namespace console_of_all_functions.libraries.puzzle
 {
     class Sudoku
     {
