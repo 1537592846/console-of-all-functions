@@ -60,6 +60,7 @@
     <Compile Include="libraries\math\Prime.cs" />
     <Compile Include="libraries\math\Sigma.cs" />
     <Compile Include="libraries\puzzle\Sudoku.cs" />
+    <Compile Include="libraries\random\People.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

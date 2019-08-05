@@ -103,7 +103,7 @@ namespace console_of_all_functions
             {
                 if (type.GetMethods().Contains(method) || !method.IsAssembly)
                 {
-                    return;
+                    continue;
                 }
 
                 string line = method.Name;
@@ -130,10 +130,10 @@ namespace console_of_all_functions
         static void RunFunction(string library, string className, string function)
         {
             Type type = Type.GetType("console_of_all_functions.libraries." + library + "." + className);
-            MethodInfo method = type.GetRuntimeMethods().Where(x => x.Name == function.Split('(')[0]).First();
+            var parameters = function.Substring(function.IndexOf('(') + 1, function.Length - function.IndexOf('(') -2).Split(';');
+            MethodInfo method = type.GetRuntimeMethods().Where(x => x.Name == function.Split('(')[0]).Where(x=>x.GetParameters().Count()==parameters.Count()).First();
             List<object> parameterList = new List<object>();
 
-            var parameters = function.Substring(function.IndexOf('(') + 1, function.Length - function.IndexOf('(') -2).Split(';');
             if (parameters[0] != "")
             {
                 for (int i = 0; i < parameters.Length; i++)
