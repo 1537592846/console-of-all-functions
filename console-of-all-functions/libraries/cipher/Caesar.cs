@@ -23,7 +23,11 @@ namespace console_of_all_functions.libraries.cipher
 
         static void CipherLetter(char letter, int jump)
         {
-            if (!char.IsLetter(letter)) return;
+            if (!char.IsLetter(letter))
+            {
+                Console.Write(letter);
+                return;
+            }
             jump = jump % 26;
             int letterValue = Convert.ToInt32(char.ToUpper(letter)) + jump;
             Alphabet.NoLineLetterASCII((26+letterValue - 65) % 26 + 65);
