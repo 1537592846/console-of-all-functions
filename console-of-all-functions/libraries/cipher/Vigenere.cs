@@ -1,9 +1,5 @@
 ﻿using console_of_all_functions.libraries.language;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace console_of_all_functions.libraries.cipher
 {
@@ -11,19 +7,29 @@ namespace console_of_all_functions.libraries.cipher
     {
         internal static void Encode(string text, string word)
         {
+            var count = 0;
             for (int i = 0; i < text.Length; i++)
             {
-                if (char.IsWhiteSpace(text[i])) Console.Write(" ");
-                else Alphabet.NoLineLetter(Alphabet.ReturnNumber(text[i]) + Alphabet.ReturnNumber(word[i % word.Length]) - 1);
+                if (!char.IsLetter(text[i])) Console.Write(text[i]);
+                else
+                {
+                    Alphabet.WriteLetterNoLine((Alphabet.ReturnNumber(text[i]) + Alphabet.ReturnNumber(word[count % word.Length]) - 1) % 26);
+                    count++;
+                }
             }
         }
 
         internal static void Decode(string text, string word)
         {
+            var count = 0;
             for (int i = 0; i < text.Length; i++)
             {
-                if (char.IsWhiteSpace(text[i])) Console.Write(" ");
-                else Alphabet.NoLineLetter(Alphabet.ReturnNumber(text[i])-Alphabet.ReturnNumber(word[i%word.Length])+1);
+                if (!char.IsLetter(text[i])) Console.Write(text[i]);
+                else
+                {
+                    Alphabet.WriteLetterNoLine((26+Alphabet.ReturnNumber(text[i]) - Alphabet.ReturnNumber(word[count % word.Length]) + 1)%26);
+                    count++;
+                }
             }
         }
     }
