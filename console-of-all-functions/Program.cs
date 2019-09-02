@@ -19,6 +19,32 @@ namespace console_of_all_functions
                     string entry = Console.ReadLine();
                     Console.WriteLine("_____________________________");
 
+                    if (entry.ToLower().StartsWith("hacks")){
+                        Type type = Type.GetType("console_of_all_functions.libraries.hacks.Hacks");
+
+                        foreach (var method in type.GetRuntimeMethods())
+                        {
+                            if (type.GetMethods().Contains(method) || !method.IsAssembly)
+                            {
+                                continue;
+                            }
+
+                            string line = method.Name;
+                            
+                            Console.WriteLine(line);
+                        }
+                    }
+
+                    if (entry.ToLower().StartsWith("hack "))
+                    {
+                        string library = "hacks";
+                        string className = "Hacks";
+                        Type type = Type.GetType("console_of_all_functions.libraries." + library + "." + className);
+                        string function = type.GetRuntimeMethods().Where(x => x.Name.ToLower() == entry.Substring(5)).First().Name;
+
+                        RunFunction(library, className, function + "()");
+                    }
+
                     if (entry.ToLower() == "exit")
                     {
                         Console.WriteLine("Exiting...");
@@ -40,17 +66,17 @@ namespace console_of_all_functions
                         ShowLibraries();
                     }
 
-                    if (entry.ToLower().Contains("classes"))
+                    if (entry.ToLower().StartsWith("classes"))
                     {
                         ShowClasses(entry.Split(' ')[1]);
                     }
 
-                    if (entry.ToLower().Contains("functions"))
+                    if (entry.ToLower().StartsWith("functions"))
                     {
                         ShowFunctions(entry.Split(' ')[1], entry.Split(' ')[2]);
                     }
 
-                    if (entry.Split(' ')[0].ToLower() == "run")
+                    if (entry.ToLower().StartsWith("run"))
                     {
                         string library = entry.Split(' ')[1];
                         string className = entry.Split(' ')[2];
@@ -70,14 +96,14 @@ namespace console_of_all_functions
         static void ShowLibraries()
         {
             var librariesList = new List<string>();
-            var typeList = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.Namespace.Contains("libraries") && !x.Namespace.EndsWith("intern")).ToList();
+            var typeList = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.Namespace != null && x.Namespace.Contains("libraries") && !x.Namespace.EndsWith("intern")).ToList();
 
             foreach (var type in typeList)
             {
                 librariesList.Add(type.Namespace.Substring(type.Namespace.LastIndexOf('.') + 1));
             }
 
-            foreach (var libraryName in librariesList.Distinct())
+            foreach (var libraryName in librariesList.Distinct().OrderBy(x => x))
             {
                 Console.WriteLine(libraryName);
             }
@@ -130,11 +156,11 @@ namespace console_of_all_functions
         static void RunFunction(string library, string className, string function)
         {
             Type type = Type.GetType("console_of_all_functions.libraries." + library + "." + className);
-            var parameters = function.Substring(function.IndexOf('(') + 1, function.Length - function.IndexOf('(') -2).Split(';');
-            MethodInfo method = type.GetRuntimeMethods().Where(x => x.Name == function.Split('(')[0]).Where(x=>x.GetParameters().Count()==parameters.Count()).First();
+            var parameters = function.Contains("()") ? new string[] { } : function.Substring(function.IndexOf('(') + 1, function.Length - function.IndexOf('(') - 2).Split(';');
+            MethodInfo method = type.GetRuntimeMethods().Where(x => x.Name == function.Split('(')[0]).Where(x => x.GetParameters().Count() == parameters.Count()).First();
             List<object> parameterList = new List<object>();
 
-            if (parameters[0] != "")
+            if (parameters.Count() != 0)
             {
                 for (int i = 0; i < parameters.Length; i++)
                 {

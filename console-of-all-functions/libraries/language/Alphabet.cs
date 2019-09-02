@@ -57,7 +57,7 @@ namespace console_of_all_functions.libraries.language
 
         internal static int ReturnNumber(string letter)
         {
-            return char.ConvertToUtf32(letter.ToUpper(), 0) - 64);
+            return char.ConvertToUtf32(letter.ToUpper(), 0 - 64);
         }
 
         internal static void WriteNumber(string letter)
