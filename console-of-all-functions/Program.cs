@@ -96,7 +96,7 @@ namespace console_of_all_functions
         static void ShowLibraries()
         {
             var librariesList = new List<string>();
-            var typeList = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.Namespace != null && x.Namespace.Contains("libraries") && !x.Namespace.EndsWith("intern")).ToList();
+            var typeList = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.Namespace != null && x.Namespace.Contains("libraries") && x.Namespace.EndsWith("hacks") && !x.Namespace.EndsWith("intern")).ToList();
 
             foreach (var type in typeList)
             {
