@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="libraries\cipher\Caesar.cs" />
     <Compile Include="libraries\cipher\Matrix.cs" />
+    <Compile Include="libraries\cipher\Morse.cs" />
     <Compile Include="libraries\cipher\Vigenere.cs" />
     <Compile Include="libraries\hacks\Hacks.cs" />
     <Compile Include="libraries\internet\Request.cs" />
