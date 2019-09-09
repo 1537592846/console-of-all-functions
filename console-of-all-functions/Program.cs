@@ -1,8 +1,10 @@
 ﻿using console_of_all_functions.libraries.intern;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 
 namespace console_of_all_functions
@@ -16,7 +18,7 @@ namespace console_of_all_functions
                 try
                 {
                     Console.Write("Type command: ");
-                    string entry = Console.ReadLine();
+                    string entry = ReadLine();
                     Console.WriteLine("_____________________________");
 
                     if (entry.ToLower().StartsWith("hacks")){
@@ -170,6 +172,16 @@ namespace console_of_all_functions
 
             method.Invoke(null, parameterList.ToArray());
             return;
+        }
+
+        private static string ReadLine()
+        {
+            Stream inputStream = Console.OpenStandardInput(100000);
+            byte[] bytes = new byte[100000];
+            int outputLength = inputStream.Read(bytes, 0, 100000);
+            //Console.WriteLine(outputLength);
+            char[] chars = Encoding.UTF7.GetChars(bytes, 0, outputLength);
+            return new string(chars).Substring(0,chars.Length-2);
         }
     }
 }
